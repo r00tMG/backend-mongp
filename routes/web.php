@@ -1,0 +1,26 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Route::get('/invoice/25', function (){
+$order = \App\Models\Order::find(25);
+    return view('invoice.invoice',[
+        'order' => $order
+    ]);
+});
+
+Route::get('/', function () {
+    return ['Laravel' => app()->version()];
+});
+
+require __DIR__.'/auth.php';

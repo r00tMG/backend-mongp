@@ -96,7 +96,7 @@ class RegisteredUserController extends Controller
                 return response()->json([
                     'message' => 'The given data was invalid.',
                     'errors' => [
-                        'password' => [
+                        'email' => [
                             'Invalid credentials'
                         ],
                     ]

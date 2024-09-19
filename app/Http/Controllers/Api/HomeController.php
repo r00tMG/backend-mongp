@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $annonces = Annonce::where('date_depart', '>=', Carbon::now())->orderBy('created_at', 'DESC')->get();
+        $annonces = Annonce::where('date_depart', '>=', Carbon::now())->where('kilos_disponibles', '>=', 1)->orderBy('created_at', 'DESC')->get();
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'La liste de vos annonces',

@@ -37,7 +37,7 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $user = auth()->user();
         //dd($user);

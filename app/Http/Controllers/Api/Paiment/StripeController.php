@@ -42,7 +42,6 @@ class StripeController extends Controller
             return response()->json(['id' => $checkoutSession->id]);
 
         } catch (\Exception $e) {
-            // Log l'exception avec le contexte de la demande
             logger('Erreur lors de la création de la session Stripe', [
                 'error' => $e->getMessage(),
                 'demande' => $demande->toArray(),

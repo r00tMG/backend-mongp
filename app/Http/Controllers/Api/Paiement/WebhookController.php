@@ -27,22 +27,22 @@ class WebhookController extends Controller
         // Traiter les différents types d'événements
         switch ($event->type) {
             case 'payment_intent.succeeded':
-                $paymentIntent = $event->data->object; // L'objet PaymentIntent
+                $paymentIntent = $event->data->object;
                 $this->handlePaymentSuccess($paymentIntent);
                 break;
 
             case 'payment_intent.payment_failed':
-                $paymentIntent = $event->data->object; // L'objet PaymentIntent
+                $paymentIntent = $event->data->object;
                 $this->handlePaymentFailure($paymentIntent);
                 break;
 
             case 'invoice.payment_succeeded':
-                $invoice = $event->data->object; // L'objet Invoice
+                $invoice = $event->data->object;
                 $this->handleInvoicePaymentSuccess($invoice);
                 break;
 
             case 'invoice.payment_failed':
-                $invoice = $event->data->object; // L'objet Invoice
+                $invoice = $event->data->object;
                 $this->handleInvoicePaymentFailure($invoice);
                 break;
             case 'charge.updated':
@@ -70,7 +70,6 @@ class WebhookController extends Controller
         $order->paid_at = now();
         $order->save();
 
-        // Notifier l'utilisateur par email
         $this->sendPaymentConfirmationEmail($order);
 
         logger('Paiement réussi pour la commande : ' . $order->id);

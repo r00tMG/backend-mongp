@@ -142,7 +142,6 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id): \Illuminate\Http\JsonResponse
     {
-
         $user = User::find($id);
        // dd($user);
         logger('check get user', [$user]);

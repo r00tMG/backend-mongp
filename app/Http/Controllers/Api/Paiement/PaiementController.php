@@ -62,6 +62,8 @@ class PaiementController extends Controller
         {
             $demande = Demande::find($order->demande_id);
             logger('demande reservée',['demande'=>$demande]);
+            $demande->statut = 'confirmé';
+            $demande->update();
         }
        /* Mail::send(new SendOrderMail(
             $order,

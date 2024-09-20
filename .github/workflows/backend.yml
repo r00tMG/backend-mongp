@@ -55,6 +55,7 @@ jobs:
           port: 22
           script: |
             cd sites/backend-mongp.mayaapps.site
+            composer update
             composer install
             php artisan migrate
             php artisan storage:link

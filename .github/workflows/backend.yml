@@ -53,5 +53,5 @@ jobs:
           password: ${{ secrets.sftp_password }}
           port: 22
           script: |
-            ls
+            cd /sites/backend-mongp.mayaapps.site/
             

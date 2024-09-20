@@ -20,7 +20,7 @@ return [
     'allowed_methods' => ['*'],
 
     #'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:5173')],
-    'allowed_origins' => ['http://localhost:5173'],
+    'allowed_origins' => ['https://frontend-mongp.vercel.app/'],
 
     'allowed_origins_patterns' => [],
 

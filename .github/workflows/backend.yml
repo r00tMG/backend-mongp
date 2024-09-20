@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Directory Permissions
         run: chmod -R 775 storage bootstrap/cache
       - name: Install PHP
@@ -33,32 +33,17 @@ jobs:
           exclude: |
             **/.github/**
             **/.releases/**
-            **/.gitignore
-            **/package-lock.json
-            **/readme.md
-            **/vendor
-            **/composer.lock
-            **/MailHog_darwin_amd64
-            **/env.example
-            **/.phpunit.cache
-            **/node_modules
-            **/public/build
-            **/public/hot
-            **/public/storage
+            **/.git/**
+            **/node_modules/**
+            **/vendor/**
             **/storage/*.key
-            **.env
+            **/.env
+            **public/build
+            **storage/dbdata/*
+            **/.phpunit.cache
+            **/public/storage
             **.env.backup
             **.env.production
-            **.phpunit.result.cache
-            **Homestead.json
-            **Homestead.yaml
-            **auth.json
-            **npm-debug.log
-            **yarn-error.log
-            **/.fleet
-            **/.idea
-            **/.vscode
-            **storage/dbdata/ibdata1
 
       - name: SSH into the production server and restart PM2
         uses: appleboy/ssh-action@v0.1.5

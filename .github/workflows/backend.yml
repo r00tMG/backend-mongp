@@ -1,4 +1,4 @@
-name: 🚀 Deploy
+name: Deploy backend-mongp
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
       - name: Composer install
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: 📂 Sync Files
+      - name: Sync Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.sftp_host }}
@@ -38,7 +38,7 @@ jobs:
             **/package-lock.json
             **/readme.md
 
-      - name: 🚀 SSH into the production server and restart PM2
+      - name: SSH into the production server and restart PM2
         uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.sftp_host }}
@@ -47,6 +47,6 @@ jobs:
           port: 22
           script: |
             cd /sites/backend-mongp.mayaapps.site
-            php artisan serve
             php artisan migrate
+            php artisan storage:link
             pm2 restart all

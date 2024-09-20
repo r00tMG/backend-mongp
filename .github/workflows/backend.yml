@@ -37,6 +37,10 @@ jobs:
             **/.gitignore
             **/package-lock.json
             **/readme.md
+            **/vendor
+            **/composer.lock
+            **/MailHog_darwin_amd64
+            **/env.example
 
       - name: SSH into the production server and restart PM2
         uses: appleboy/ssh-action@v0.1.5

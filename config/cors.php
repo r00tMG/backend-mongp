@@ -23,7 +23,6 @@ return [
     #'allowed_origins' => ['https://frontend-mongp.vercel.app/*'],
     #'allowed_origins' => ['*'],
 
-
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],

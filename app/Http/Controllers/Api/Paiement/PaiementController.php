@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Paiement;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\OrderResource;
 use App\Mail\SendOrderMail;
+use App\Models\Demande;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -56,6 +57,12 @@ class PaiementController extends Controller
         $order->paid_at = now();
         $order->email=$request->email;
         $order->save();
+        logger('status',['status'=>$order->save()]);
+        if ($order->save())
+        {
+            $demande = Demande::find($order->demande_id);
+            logger('demande reservée',['demande'=>$demande]);
+        }
        /* Mail::send(new SendOrderMail(
             $order,
             $validator->getData()

@@ -53,8 +53,5 @@ jobs:
           password: ${{ secrets.sftp_password }}
           port: 22
           script: |
-            cd /sites/backend-mongp.mayaapps.site
-            composer install
-            php artisan migrate
-            php artisan storage:link
-            pm2 restart all
+            ls
+            

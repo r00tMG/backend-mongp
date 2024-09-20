@@ -38,12 +38,13 @@ jobs:
             **/vendor/**
             **/storage/*.key
             **/.env
-            **public/build
-            **storage/dbdata/*
+            **/public/build
+            **/storage/dbdata/*
             **/.phpunit.cache
             **/public/storage
-            **.env.backup
-            **.env.production
+            **/.env.backup
+            **/.env.production
+            **/composer.lock
 
       - name: SSH into the production server and restart PM2
         uses: appleboy/ssh-action@v0.1.5

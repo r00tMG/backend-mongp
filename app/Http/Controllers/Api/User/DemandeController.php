@@ -20,7 +20,7 @@ class DemandeController extends Controller
         })->with('annonce')->get();
             logger('demandes',['demandes'=>$demandes]);
 
-        return response()->json($demandes);
+        return response()->json(DemandeResource::collection($demandes));
     }
 
     public function show(string $id)

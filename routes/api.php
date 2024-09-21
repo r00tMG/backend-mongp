@@ -44,7 +44,10 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::apiResource('demandes',\App\Http\Controllers\Api\User\DemandeController::class);
 
     Route::post('/payment-intent', [\App\Http\Controllers\Api\Paiement\PaiementController::class, 'createPaymentIntent']);
+
     Route::post('create/orders',[\App\Http\Controllers\Api\Paiement\PaiementController::class,'storeOrder']);
+    Route::get('index/orders',[\App\Http\Controllers\Api\Paiement\PaiementController::class,'index']);
+
 
     Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
     Route::post('create-checkout-session', [\App\Http\Controllers\Api\Paiment\StripeController::class, 'createCheckoutSession']);

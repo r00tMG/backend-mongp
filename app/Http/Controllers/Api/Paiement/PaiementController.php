@@ -81,6 +81,15 @@ class PaiementController extends Controller
         ]);
 
     }
+
+    public function index()
+    {
+        $orders = Order::orderBy('created_at','DESC')->get();
+        return \response()->json([
+            'message' => 'Vos commandes',
+            'orders' => OrderResource::collection($orders)
+        ]);
+    }
     public function generateInvoice($orderId)
     {
         $order = Order::with('demande')->findOrFail($orderId);

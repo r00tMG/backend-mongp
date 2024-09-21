@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    public function index($id)
+    public function index($userId)
     {
-        $messages = Message::where(function($query) use ($id) {
+        $messages = Message::where(function($query) use ($userId) {
             $query->where('emetteur_id', Auth::id())
                 ->orWhere('recepteur_id', Auth::id());
-        })->where(function($query) use ($id) {
-            $query->where('emetteur_id', $id)
-                ->orWhere('recepteur_id', $id);
+        })->where(function($query) use ($userId) {
+            $query->where('emetteur_id', $userId)
+                ->orWhere('recepteur_id', $userId);
         })->get();
 
         return response()->json($messages);

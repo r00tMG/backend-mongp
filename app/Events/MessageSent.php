@@ -26,11 +26,11 @@ class MessageSent
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return PrivateChannel
+     * @return Channel
      */
-    public function broadcastOn(): PrivateChannel
+    public function broadcastOn(): Channel
     {
-        return new PrivateChannel('chat.' . $this->message->recepteur_id);
+        return new Channel('chat.' . $this->message->to_user_id);
 
     }
 }

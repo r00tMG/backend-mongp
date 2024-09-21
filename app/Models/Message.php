@@ -10,8 +10,13 @@ class Message extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function users()
+    public function fromUser()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'from_user_id');
+    }
+
+    public function toUser()
+    {
+        return $this->belongsTo(User::class, 'to_user_id');
     }
 }

@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
     Route::apiResource('annonces', \App\Http\Controllers\Api\User\AnnonceController::class);
 
-    Route::get('/messages/{id}', [MessageController::class, 'index']);
+    Route::get('/messages/{userId}', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
 
     Route::apiResource('demandes',\App\Http\Controllers\Api\User\DemandeController::class);

@@ -57,9 +57,6 @@ class DemandeController extends Controller
         $demande->statut = 'en_attente';
         $demande->save();
 
-        $annonce->kilos_disponibles -= $request->kilos_demandes;
-        $annonce->save();
-
         return response()->json([
             'message' => 'Demande créée avec succès.',
             'demande' => new DemandeResource($demande),
@@ -85,7 +82,6 @@ class DemandeController extends Controller
         if (auth()->id() !== $demande->user_id) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
-
         $demande->delete();
         return response()->json(['message' => 'Demande supprimée'], 200);
     }

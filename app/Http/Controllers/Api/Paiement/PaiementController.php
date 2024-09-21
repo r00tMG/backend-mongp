@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Paiement;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\OrderResource;
 use App\Mail\SendOrderMail;
+use App\Models\Annonce;
 use App\Models\Demande;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -64,6 +65,9 @@ class PaiementController extends Controller
             logger('demande reservée',['demande'=>$demande]);
             $demande->statut = 'confirmé';
             $demande->update();
+            $annonce = Annonce::find($demande->annonce_id);
+            $annonce->kilos_disponibles -= $demande->kilos_demandes;
+            $annonce->update();
         }
        /* Mail::send(new SendOrderMail(
             $order,

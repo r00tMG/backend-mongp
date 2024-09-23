@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
             'email' => 'required|email|unique:users,email',
             'photo_profile' => ['required', 'file', 'mimes:jpeg,png,jpg,gif,svg'],
             'password' => 'required|same:password_confirmation',
-            //'roles' => 'required'
+            'roles' => 'required'
         ]);
         //dd($validated->fails());
         logger($validated->fails());

@@ -212,7 +212,7 @@ class UserController extends Controller
                 'message' => "Aucun utilisateur n'a été trouvé",
             ]);
         }
-        User::find($id)->delete();
+        User::where('annonces')->find($id)->delete();
         return response()->json([
             'status' => Response::HTTP_NO_CONTENT,
             'message' => "Votre utilisateur a été supprimé",

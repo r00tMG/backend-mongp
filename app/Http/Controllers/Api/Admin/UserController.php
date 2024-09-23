@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\UserResource;
+use App\Models\Annonce;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -212,7 +213,9 @@ class UserController extends Controller
                 'message' => "Aucun utilisateur n'a été trouvé",
             ]);
         }
-        User::where('annonces')->find($id)->delete();
+        Annonce::where('gp_id', $id)->delete();
+        User::find($id)->delete();
+
         return response()->json([
             'status' => Response::HTTP_NO_CONTENT,
             'message' => "Votre utilisateur a été supprimé",

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Annonce;
+use App\Models\Demande;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -214,9 +215,11 @@ class UserController extends Controller
                 'message' => "Aucun utilisateur n'a été trouvé",
             ]);
         }
-        Annonce::where('gp_id', $id)->delete();
         Order::where('user_id',$id)->delete();
+        Demande::where('user_id')->delete();
+        Annonce::where('gp_id', $id)->delete();
         User::find($id)->delete();
+
 
         return response()->json([
             'status' => Response::HTTP_NO_CONTENT,

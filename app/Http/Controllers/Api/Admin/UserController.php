@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\Annonce;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -214,6 +215,7 @@ class UserController extends Controller
             ]);
         }
         Annonce::where('gp_id', $id)->delete();
+        Order::where('user_id',$id)->delete();
         User::find($id)->delete();
 
         return response()->json([

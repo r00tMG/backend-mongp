@@ -215,12 +215,15 @@ class UserController extends Controller
                 'message' => "Aucun utilisateur n'a été trouvé",
             ]);
         }
-        Order::where('user_id',$id)->delete();
-        Demande::where('user_id')->delete();
-        Annonce::where('gp_id', $id)->delete();
-        User::find($id)->delete();
+        ##Order::where('user_id',$id)->delete();
+        ##Demande::where('user_id')->delete();
+        ##Annonce::where('gp_id', $id)->delete();
+        $user = User::find($id);
+        $user->profile()->delete();
+        $user->annonces()->delete();
+        $user->orders()->delete();
 
-
+        $user->delete();
         return response()->json([
             'status' => Response::HTTP_NO_CONTENT,
             'message' => "Votre utilisateur a été supprimé",

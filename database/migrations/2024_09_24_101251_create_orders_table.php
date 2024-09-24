@@ -27,7 +27,6 @@ return new class extends Migration
                 ->constrained('demandes')
                 ->onDelete('cascade');
             $table->timestamps();
-
         });
     }
 

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('annonce_id')->constrained('annonces')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedBigInteger('annonce_id')->index();
+            $table->foreign('annonce_id')->references('id')->on('annonces')->onDelete('cascade');            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('kilos_demandes');
             $table->decimal('prix_de_la_demande');
             $table->enum('statut', ['en_attente', 'confirmé', 'refusé']);

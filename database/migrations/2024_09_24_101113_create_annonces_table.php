@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('annonces', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gp_id')
-                ->constrained('users')
-                ->onDelete('cascade');
+            $table->foreignId('gp_id')->constrained('users')->onDelete('cascade');
             $table->integer('kilos_disponibles');
             $table->dateTime('date_depart');
             $table->dateTime('date_arrivee');

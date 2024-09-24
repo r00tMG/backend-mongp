@@ -136,7 +136,6 @@ class UserController extends Controller
             'storage' => asset('storage'),
             'user' => new UserResource($user)
         ]);
-        #return view('admin.users.show',compact('user'));
     }
 
 
@@ -234,7 +233,6 @@ class UserController extends Controller
             'status' => Response::HTTP_NO_CONTENT,
             'message' => "Votre utilisateur a été supprimé",
         ]);
-        return redirect()->route('users.index')->with('success','User deleted successfully');
     }
 
 }

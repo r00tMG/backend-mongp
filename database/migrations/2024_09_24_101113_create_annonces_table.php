@@ -20,6 +20,9 @@ return new class extends Migration
             $table->dateTime('date_depart');
             $table->dateTime('date_arrivee');
             $table->text('description');
+            $table->float('prix_du_kilo');
+            $table->string('origin');
+            $table->string('destination');
             $table->timestamps();
         });
     }

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->string('payment_intent_id')->nullable();
             $table->decimal('total', 10, 2);
             $table->string('status')->default('pending');  // Statut de la commande (ex : pending, paid, canceled)
             $table->string('payment_status')->default('unpaid');
             $table->timestamp('paid_at')->nullable();
+            $table->string('email');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

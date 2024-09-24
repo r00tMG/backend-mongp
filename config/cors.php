@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'https://frontend-mongp.vercel.app')],
+    'allowed_origins' => [env('FRONTEND_URL', '*')],
     #'allowed_origins' => ['https://frontend-mongp.vercel.app/*'],
     #'allowed_origins' => ['*'],
 

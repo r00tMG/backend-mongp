@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('gp_id')
                 ->constrained('users')
                 ->onDelete('cascade');
-
         });
     }
 

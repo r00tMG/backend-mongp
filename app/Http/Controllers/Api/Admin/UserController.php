@@ -217,11 +217,12 @@ class UserController extends Controller
         }
         ##Order::where('user_id',$id)->delete();
         ##Demande::where('user_id')->delete();
-        Annonce::where('gp_id', $id)->delete();
+        ###Annonce::where('gp_id', $id)->delete();
         $user = User::find($id);
         $user->profile()->delete();
-        //$user->annonces()->delete();
+        $user->annonces()->delete();
         $user->orders()->delete();
+        $user->orders()->demande()->delete();
 
         $user->delete();
         return response()->json([

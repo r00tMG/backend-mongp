@@ -220,11 +220,16 @@ class UserController extends Controller
         ###Annonce::where('gp_id', $id)->delete();
         $user = User::find($id);
         $user->profile()->delete();
+        logger('profile deleted');
         $user->annonces()->delete();
-        $user->orders()->delete();
+        logger('annonce deleted');
         $user->orders()->demande()->delete();
+        logger('demande deleted');
+        $user->orders()->delete();
+        logger('orders deleted');
 
         $user->delete();
+        logger('user deleted');
         return response()->json([
             'status' => Response::HTTP_NO_CONTENT,
             'message' => "Votre utilisateur a été supprimé",

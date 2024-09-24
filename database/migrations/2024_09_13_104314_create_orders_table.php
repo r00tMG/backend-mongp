@@ -19,7 +19,13 @@ return new class extends Migration
             $table->string('status')->default('pending');  // Statut de la commande (ex : pending, paid, canceled)
             $table->string('payment_status')->default('unpaid');
             $table->timestamp('paid_at')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreignId('demande_id')
+                ->constrained('demandes')
+                ->onDelete('cascade');
             $table->timestamps();
 
         });

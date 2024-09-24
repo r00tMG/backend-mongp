@@ -19,13 +19,8 @@ return new class extends Migration
             $table->string('payment_status')->default('unpaid');
             $table->timestamp('paid_at')->nullable();
             $table->string('email');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->foreignId('demande_id')
-                ->constrained('demandes')
-                ->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('demande_id')->constrained('demandes')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('annonce_id')->constrained('annonces')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('kilos_demandes');
-            $table->float('prix_de_la_demande');
+            $table->decimal('prix_de_la_demande');
             $table->enum('statut', ['en_attente', 'confirmé', 'refusé']);
             $table->timestamps();
         });

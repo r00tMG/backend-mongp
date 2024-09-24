@@ -36,7 +36,7 @@ class PaiementController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'payment_intent_id' => ['required','string'],
-            'total' => ['required','integer'],
+            'total' => ['required'],
             'demande_id' => ['required', 'integer'],
             'email' => ['required', 'email']
         ]);

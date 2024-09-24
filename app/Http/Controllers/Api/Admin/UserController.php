@@ -207,32 +207,35 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        if ($id == null)
-        {
+        if ($id == null) {
             return response()->json([
                 'status' => Response::HTTP_NO_CONTENT,
                 'message' => "Aucun utilisateur n'a été trouvé",
             ]);
         }
-        ##Order::where('user_id',$id)->delete();
-        ##Demande::where('user_id')->delete();
-        ###Annonce::where('gp_id', $id)->delete();
+
         $user = User::find($id);
-        $user->profile()->delete();
-        logger('profile deleted');
-        $user->annonces()->delete();
-        logger('annonce deleted');
-        $user->orders()->demande()->delete();
-        logger('demande deleted');
+
         $user->orders()->delete();
         logger('orders deleted');
 
+        Demande::where('user_id', $id)->delete();
+        logger('demandes deleted');
+
+        $user->annonces()->delete();
+        logger('annonces deleted');
+
+        $user->profile()->delete();
+        logger('profile deleted');
+
         $user->delete();
         logger('user deleted');
+
         return response()->json([
             'status' => Response::HTTP_NO_CONTENT,
             'message' => "Votre utilisateur a été supprimé",
         ]);
     }
+
 
 }

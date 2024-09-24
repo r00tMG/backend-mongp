@@ -57,6 +57,8 @@ jobs:
             cd sites/backend-mongp.mayaapps.site
             composer update
             composer install
-            php artisan migrate
+            php artisan migrate:refresh
+            php artisan db:seed --class=PermissionTableSeeder
+            php artisan db:seed --class=CreateAdminUserSeeder
             php artisan storage:link
-            
+

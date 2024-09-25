@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,8 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        return UserResource::collection(User::all());
+        $user = User::select('name', 'id')->where('id', '!=', Auth::id())->get();
+        return UserResource::collection($user);
     }
     /**
      * Display a listing of the resource.

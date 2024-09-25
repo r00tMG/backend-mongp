@@ -14,8 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MessageController extends Controller
 {
-    public function index($userId)
+    public function index(Request $request,$userId)
     {
+        $emetteur_id = $request->emetteur_id;
+        $recepteur_id = $request->recepteur_id;
+
+        // valdiation
 
         $messages = Message::where(function($query) use ($userId) {
             $query->where('emetteur_id', Auth::id())

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MessageResource;
+use App\Http\Resources\User\MessageResource;
 use App\Models\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

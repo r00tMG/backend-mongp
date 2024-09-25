@@ -6,7 +6,7 @@ use App\Http\Resources\Admin\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MessageController extends JsonResource
+class MessageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,6 +25,6 @@ class MessageController extends JsonResource
             'recepteur' => new UserResource(
                 $this->resource->toUser
             )
-        ];
+        ];;
     }
 }

@@ -30,8 +30,8 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        $user = User::select('name', 'id')->where('id', '!=', Auth::id())->get();
-        return UserResource::collection($user);
+        $users = User::where('id', '!=', Auth::id())->get();
+        return $users;
     }
     /**
      * Display a listing of the resource.

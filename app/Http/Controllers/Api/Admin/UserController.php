@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+        $users = User::select('id','name','photo_profile')->where('id', '!=', Auth::id())->get();
         return $users;
     }
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,7 +25,10 @@ class MessageController extends Controller
                 ->orWhere('recepteur_id', $userId);
         })->get();
 
-        return response()->json($messages);
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'messages'=> MessageResource::collection($messages)
+        ]);
     }
 
     public function store(Request $request)
@@ -54,7 +58,8 @@ class MessageController extends Controller
             logger('message sent');
             return response()->json([
                 'status' => Response::HTTP_CREATED,
-                'message'=>$message]);
+                'message'=> new MessageResource($message)
+            ]);
         }catch (\Exception $e){
             logger('Error sending message: ' . $e->getMessage());
             return response()->json(['error' => 'Server error'], 500);

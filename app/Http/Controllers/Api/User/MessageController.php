@@ -8,6 +8,8 @@ use App\Models\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class MessageController extends Controller
 {
@@ -26,6 +28,17 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+           'recepteur_id' => 'required|exists:users,id',
+            'contenu'=>'required|string'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json([
+               'status' => Response::HTTP_BAD_REQUEST,
+               'errors' => $validator->errors()
+            ]);
+        }
         $message = Message::create([
             'emetteur_id' => Auth::id(),
             'recepteur_id' => $request->recepteur_id,

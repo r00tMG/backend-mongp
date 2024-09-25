@@ -30,7 +30,7 @@ class MessageSent
      */
     public function broadcastOn(): Channel
     {
-        return new Channel('chat.' . $this->message->to_user_id);
+        return new Channel('chat.' . $this->message->recepteur_id);
 
     }
 }

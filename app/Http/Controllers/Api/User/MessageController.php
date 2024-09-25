@@ -15,6 +15,7 @@ class MessageController extends Controller
 {
     public function index($userId)
     {
+
         $messages = Message::where(function($query) use ($userId) {
             $query->where('emetteur_id', Auth::id())
                 ->orWhere('recepteur_id', Auth::id());
@@ -39,16 +40,25 @@ class MessageController extends Controller
                'errors' => $validator->errors()
             ]);
         }
-        $message = Message::create([
-            'emetteur_id' => Auth::id(),
-            'recepteur_id' => $request->recepteur_id,
-            'contenu' => $request->contenu,
-            'date_envoi' => Carbon::now()
-        ]);
+        try {
 
-        broadcast(new MessageSent($message))->toOthers();
+            $message = Message::create([
+                'emetteur_id' => Auth::id(),
+                'recepteur_id' => $request->recepteur_id,
+                'contenu' => $request->contenu,
+                'date_envoi' => Carbon::now()
+            ]);
+            logger('message create');
 
-        return response()->json($message);
+            broadcast(new MessageSent($message))->toOthers();
+            logger('message sent');
+            return response()->json([
+                'status' => Response::HTTP_CREATED,
+                'message'=>$message]);
+        }catch (\Exception $e){
+            logger('Error sending message: ' . $e->getMessage());
+            return response()->json(['error' => 'Server error'], 500);
+        }
     }
 
     /*public function index(Request $request,$recepteurId)

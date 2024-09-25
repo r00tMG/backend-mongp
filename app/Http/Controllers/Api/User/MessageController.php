@@ -27,7 +27,7 @@ class MessageController extends Controller
         })->where(function($query) use ($userId) {
             $query->where('emetteur_id', $userId)
                 ->orWhere('recepteur_id', $userId);
-        })->orderBy('date_envoi','DESC')->get();
+        })->get();
 
         return response()->json([
             'status' => Response::HTTP_OK,

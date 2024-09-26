@@ -30,7 +30,15 @@ class UserController extends Controller
 
     public function getUsers()
     {
-
+        $user = auth()->user();
+        //dd($user);
+        if (!$user)
+        {
+            return response()->json([
+                'status' => Response::HTTP_UNAUTHORIZED,
+                'message' => "Unauthorized",
+            ]);
+        }
         $users = User::where('id', '!=', Auth::id())->get();
 
         return response()->json([

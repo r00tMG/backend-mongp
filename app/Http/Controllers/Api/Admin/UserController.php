@@ -45,7 +45,7 @@ class UserController extends Controller
             'status' => Response::HTTP_OK,
             'message' => "Ceci est la liste des utilisateurs",
             'storage' => asset('storage'),
-            'users' => UserResource::collection($users)
+            'users' => $users
         ]);
     }
     /**

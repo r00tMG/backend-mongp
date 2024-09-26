@@ -39,7 +39,7 @@ class UserController extends Controller
                 'message' => "Unauthorized",
             ]);
         }
-        $users = User::where('id','!=',Auth::id());
+        $users = User::where('id','!=',Auth::id())->get();
 
         return response()->json([
             'status' => Response::HTTP_OK,

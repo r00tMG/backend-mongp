@@ -30,8 +30,15 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        $users = User::pluck('id','name','photo_profile')->where('id', '!=', Auth::id())->get();
-        return $users;
+
+        $users = User::where('id', '!=', Auth::id())->get();
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => "Ceci est la liste des utilisateurs",
+            'storage' => asset('storage'),
+            'users' => UserResource::collection($users)
+        ]);
     }
     /**
      * Display a listing of the resource.

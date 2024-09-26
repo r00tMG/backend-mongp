@@ -26,8 +26,8 @@ Route::get('annonce_on_home', [\App\Http\Controllers\Api\HomeController::class, 
 
 # Private Endpoint
 
+    Route::get('getUsers',[UserController::class,'getUsers']);
 Route::group(['middleware' => ['auth:sanctum']], function (){
-    //Route::get('getUsers',[UserController::class,'getUsers']);
     Route::apiResource('users',UserController::class);
 
     Route::apiResource('roles',RoleController::class);

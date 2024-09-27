@@ -73,22 +73,19 @@ class MessageController extends Controller
 
     public function getUnreadMessagesCount($userId)
     {
-        /*$unreadMessagesCount = Message::where('recepteur_id', $userId)
+        $unreadMessagesCount = Message::where('recepteur_id', $userId)
             ->where('is_read', false)
-            ->groupBy('emetteur_id')
             ->count();
 
-        return response()->json([
-            'unread_messages_count' => $unreadMessagesCount
-        ]);*/
         $unreadMessages = Message::select('emetteur_id', DB::raw('COUNT(*) as unread_count'))
-            ->where('recepteur_id', $userId)           // Messages reçus par l'utilisateur
-            ->where('is_read', false)                  // Messages non lus
-            ->groupBy('emetteur_id')                   // Grouper par émetteur (discussion)
+            ->where('recepteur_id', $userId)
+            ->where('is_read', false)
+            ->groupBy('emetteur_id')
             ->get();
 
         return response()->json([
-            'unread_messages_by_discussion' => $unreadMessages
+            'unread_messages_by_discussion' => $unreadMessages,
+            'unread_messages_count' => $unreadMessagesCount
         ]);
     }
 }

@@ -70,16 +70,14 @@ class MessageController extends Controller
         }
     }
 
-    public function countUnreadMessages()
+    public function getUnreadMessagesCount($userId)
     {
-        $userId = Auth::id();
-
-        $unreadCount = Message::where('recepteur_id', $userId)
-            ->where('is_read', 0)
+        $unreadMessagesCount = Message::where('recepteur_id', $userId)
+            ->where('is_read', false)
             ->count();
 
         return response()->json([
-            'unread_messages' => $unreadCount
+            'unread_messages_count' => $unreadMessagesCount
         ]);
     }
 }

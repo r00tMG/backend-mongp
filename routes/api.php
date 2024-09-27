@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
     Route::get('/messages/{userId}', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
-    Route::get('/messages/unread-count', [MessageController::class, 'countUnreadMessages']);
+    Route::get('/messages/unread/{userId}', [MessageController::class, 'getUnreadMessagesCount']);
 
 
     Route::apiResource('demandes',\App\Http\Controllers\Api\User\DemandeController::class);

@@ -74,7 +74,8 @@ class MessageController extends Controller
     {
         $unreadMessagesCount = Message::where('recepteur_id', $userId)
             ->where('is_read', false)
-            ->count();
+            ->groupBy('emetteur_id')
+            ->get();
 
         return response()->json([
             'unread_messages_count' => $unreadMessagesCount

@@ -50,7 +50,6 @@ class MessageController extends Controller
             ]);
         }
         try {
-
             $message = Message::create([
                 'emetteur_id' => Auth::id(),
                 'recepteur_id' => $request->recepteur_id,
@@ -70,7 +69,6 @@ class MessageController extends Controller
             return response()->json(['error' => 'Server error'], 500);
         }
     }
-
     public function getUnreadMessagesCount($userId)
     {
         $unreadMessagesCount = Message::where('recepteur_id', $userId)

@@ -88,14 +88,22 @@ class MessageController extends Controller
     }
     public function markMessagesAsRead($userId)
     {
-        Message::where('recepteur_id', Auth::id())
-            ->where('emetteur_id', $userId)
-            ->where('is_read', false)
-            ->update(['is_read' => true]);
+        $message = Message::findOrFail($userId);
+
+        // Vérifiez que l'utilisateur est bien le recepteur du message
+        if ($message->recepteur_id != Auth::id()) {
+            return response()->json([
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => 'Unauthorized to mark this message as read'
+            ]);
+        }
+
+        $message->is_read = true;
+        $message->save();
 
         return response()->json([
             'status' => Response::HTTP_OK,
-            'message' => 'Messages marked as read.'
+            'message' => 'Message marked as read successfully'
         ]);
     }
 

@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::get('/messages/{userId}', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
     Route::get('/messages/unread/{userId}', [MessageController::class, 'getUnreadMessagesCount']);
-    Route::post('/messages/mark-as-read/{userId}', [MessageController::class, 'markMessagesAsRead']);
+    Route::put('/messages/mark-as-read/{userId}', [MessageController::class, 'markMessagesAsRead']);
 
 
 

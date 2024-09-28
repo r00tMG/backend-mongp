@@ -86,4 +86,18 @@ class MessageController extends Controller
             'unread_messages_count' => $unreadMessagesCount
         ]);
     }
+    public function markMessagesAsRead($userId)
+    {
+        Message::where('recepteur_id', Auth::id())
+            ->where('emetteur_id', $userId)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Messages marked as read.'
+        ]);
+    }
+
+
 }

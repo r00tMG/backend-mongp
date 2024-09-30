@@ -30,7 +30,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => 'Paiement pour la demande #' . $demande->id,
                         ],
-                        'unit_amount' => $demande->montant * 100, // En cents
+                        'unit_amount' => $demande->montant * 100,
                     ],
                     'quantity' => 1,
                 ]],
